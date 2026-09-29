@@ -123,6 +123,26 @@ export default function CampaignManager() {
     finally { setBusy(false); }
   }
 
+  async function deleteCampaign(campaign: Campaign) {
+    const confirmed = window.confirm(
+      `ATENÇÃO: apagar definitivamente a campanha “${campaign.name}”? Isso removerá os vínculos dos jogadores e todas as fichas desta campanha. As contas dos jogadores não serão apagadas. Esta ação não pode ser desfeita.`,
+    );
+    if (!confirmed) return;
+
+    setBusy(true); setMessage(""); setError("");
+    try {
+      const data = await send("/api/master/campaigns", "DELETE", { campaignId: campaign.id });
+      setMessage(data.message || "Campanha apagada definitivamente.");
+      if (playerCampaignId === campaign.id) setPlayerCampaignId("");
+      if (editing?.campaignId === campaign.id) setEditing(null);
+      await loadCampaigns();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Erro ao apagar campanha.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return <main className="shell">
     <header className="topbar">
       <Link href="/" className="brand"><span className="brand-mark">A</span> ARKANO</Link>
@@ -150,7 +170,7 @@ export default function CampaignManager() {
         <div className="section-heading"><div><div className="eyebrow">Seu universo</div><h2>Campanhas criadas <span className="count-badge">{campaigns.length}</span></h2></div></div>
         {loading ? <div className="panel muted">Carregando campanhas...</div> : campaigns.length === 0 ? <div className="panel empty-state"><div className="empty-icon">✧</div><h3>Sua próxima aventura começa aqui</h3><p className="muted">Crie uma campanha acima. Depois, cadastre os jogadores e eles serão vinculados automaticamente ao grupo.</p></div> : <div className="campaign-stack">
           {campaigns.map(campaign => <article className="campaign-card" key={campaign.id}>
-            <div className="campaign-card-head"><div><div className="campaign-system">{campaign.system}</div><h3>{campaign.name}</h3><p className="muted">{campaign.description || "Nenhuma descrição adicionada."}</p></div><div className="member-count"><strong>{campaign.players.length}</strong><span>jogadores</span></div></div>
+            <div className="campaign-card-head"><div><div className="campaign-system">{campaign.system}</div><h3>{campaign.name}</h3><p className="muted">{campaign.description || "Nenhuma descrição adicionada."}</p><button className="text-action danger-action campaign-delete-button" type="button" disabled={busy} onClick={() => void deleteCampaign(campaign)}>Apagar campanha definitivamente</button></div><div className="member-count"><strong>{campaign.players.length}</strong><span>jogadores</span></div></div>
             <div className="campaign-divider" />
             <div className="players-heading"><h4>Jogadores vinculados</h4><button className="button secondary small-button" type="button" onClick={() => setPlayerCampaignId(playerCampaignId === campaign.id ? "" : campaign.id)}>{playerCampaignId === campaign.id ? "Fechar cadastro" : "+ Adicionar jogador"}</button></div>
             {playerCampaignId === campaign.id && <form className="player-create-form" onSubmit={createPlayer}>

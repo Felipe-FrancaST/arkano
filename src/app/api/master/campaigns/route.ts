@@ -77,3 +77,45 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
+
+
+export async function DELETE(request: Request) {
+  try {
+    const auth = await getMaster();
+    if ("error" in auth) return auth.error;
+    const { user, admin } = auth;
+    const body = await request.json();
+    const campaignId = typeof body.campaignId === "string" ? body.campaignId : "";
+
+    if (!campaignId) {
+      return NextResponse.json({ error: "Informe a campanha que deseja apagar." }, { status: 400 });
+    }
+
+    const { data: campaign, error: campaignError } = await admin.from("campaigns")
+      .select("id")
+      .eq("id", campaignId)
+      .eq("master_id", user.id)
+      .maybeSingle();
+    if (campaignError) throw campaignError;
+    if (!campaign) {
+      return NextResponse.json({ error: "Campanha não encontrada ou sem permissão." }, { status: 404 });
+    }
+
+    // Remove campaign-owned data first. Player accounts themselves are preserved.
+    const { error: charactersError } = await admin.from("characters").delete().eq("campaign_id", campaignId);
+    if (charactersError) throw charactersError;
+
+    const { error: membersError } = await admin.from("campaign_members").delete().eq("campaign_id", campaignId);
+    if (membersError) throw membersError;
+
+    const { error: deleteError } = await admin.from("campaigns").delete()
+      .eq("id", campaignId)
+      .eq("master_id", user.id);
+    if (deleteError) throw deleteError;
+
+    return NextResponse.json({ message: "Campanha apagada definitivamente. As contas dos jogadores foram mantidas." });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Não foi possível apagar a campanha.";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
