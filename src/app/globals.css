@@ -160,3 +160,88 @@ h1 span { color:var(--gold); }
  .players-heading { align-items:flex-start; }
  .players-heading h4 { padding-top:8px; }
 }
+
+/* Ficha D&D 5e editável — organização inspirada na ficha de referência. */
+.character-page-wrap { max-width: 1400px; }
+.character-intro { max-width: 760px; line-height: 1.7; }
+.dnd-sheet-editor { margin-top: 26px; }
+.sheet-toolbar { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px 20px; }
+.sheet-toolbar-title { display:flex; align-items:center; gap:12px; }
+.sheet-emblem { display:grid; place-items:center; width:43px; height:43px; border:1px solid #d9b66d66; border-radius:12px; color:var(--gold); font-size:23px; }
+.sheet-toolbar-title div { display:grid; gap:4px; }
+.sheet-toolbar-title strong { color:var(--text); font-family:Marcellus,Georgia,serif; font-size:19px; }
+.sheet-toolbar-title div span { color:var(--muted); font-size:11px; }
+.sheet-toolbar-actions { display:flex; align-items:end; gap:12px; flex-wrap:wrap; }
+.compact-field { min-width:190px; }
+.compact-field select { min-height:42px; }
+.character-picker { display:flex; gap:10px; overflow-x:auto; padding:14px 0 3px; }
+.character-tab { flex:0 0 auto; display:grid; gap:5px; min-width:175px; padding:12px 15px; border:1px solid var(--line); border-radius:10px; background:#11151e; color:var(--text); text-align:left; }
+.character-tab span { font-weight:700; font-size:13px; }
+.character-tab small { color:var(--muted); font-size:11px; }
+.character-tab.active { border-color:var(--gold); background:#d9b66d12; }
+.dnd-identity { margin-top:16px; padding:18px; background:linear-gradient(120deg,#1b202b,#12151d); }
+.dnd-title-mark { display:flex; align-items:center; justify-content:space-between; gap:15px; border-bottom:1px solid var(--line); padding-bottom:13px; margin-bottom:16px; }
+.dnd-title-mark span { color:var(--gold); font-size:10px; letter-spacing:2px; font-weight:800; }
+.dnd-title-mark strong { color:var(--muted); font-size:10px; letter-spacing:1.5px; }
+.identity-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+.identity-grid .field input { min-height:40px; }
+.dnd-main-grid { display:grid; grid-template-columns:minmax(245px,.86fr) minmax(330px,1.12fr) minmax(245px,.86fr); gap:15px; align-items:start; margin-top:16px; }
+.dnd-column { min-width:0; display:grid; gap:14px; }
+.dnd-section-heading { display:flex; align-items:center; gap:10px; padding:5px 2px; }
+.dnd-section-heading > span { display:grid; place-items:center; width:28px; height:28px; border:1px solid #d9b66d66; border-radius:8px; color:var(--gold); font-size:10px; font-weight:800; }
+.dnd-section-heading h2 { margin:0; font-size:24px; }
+.ability-stack { display:grid; grid-template-columns:1fr; gap:10px; }
+.ability-card { display:grid; grid-template-columns:minmax(70px,1fr) 72px 78px; gap:9px; align-items:center; padding:13px; border:1px solid var(--line); border-radius:12px; background:linear-gradient(140deg,#1a1f2a,#11151d); }
+.ability-name { display:grid; gap:5px; color:var(--text); font-size:13px; font-weight:700; }
+.ability-name small { color:var(--gold); font-size:10px; letter-spacing:1.5px; }
+.ability-score,.ability-modifier { display:grid; gap:5px; text-align:center; }
+.ability-score span,.ability-modifier span { color:var(--muted); font-size:9px; line-height:1.2; }
+.ability-score input { width:100%; min-width:0; border:1px solid var(--line); border-radius:7px; background:#0c1017; color:var(--text); padding:8px 4px; font-size:18px; font-weight:800; text-align:center; }
+.ability-modifier strong { display:grid; place-items:center; min-height:36px; border:1px solid #d9b66d55; border-radius:7px; color:var(--gold); background:#d9b66d0b; font-size:18px; }
+.proficiency-check { grid-column:1/-1; display:flex; align-items:center; gap:7px; color:var(--muted); font-size:11px; padding-top:8px; border-top:1px solid #ffffff0d; }
+.proficiency-check input,.skill-row input,.inspiration-toggle input { accent-color:var(--gold); }
+.dnd-card { min-width:0; padding:17px; border:1px solid var(--line); border-radius:12px; background:rgba(18,22,31,.94); }
+.dnd-card h3 { margin:0 0 9px; font-size:20px; }
+.tiny { font-size:11px; line-height:1.6; margin:0 0 12px; }
+.skill-list { display:grid; grid-template-columns:1fr; }
+.skill-row { display:grid; grid-template-columns:15px minmax(0,1fr) 28px; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid #ffffff0b; }
+.skill-row:last-child { border-bottom:0; }
+.skill-row > span { display:flex; align-items:center; justify-content:space-between; gap:6px; color:var(--text); font-size:11px; }
+.skill-row small { color:var(--muted); font-size:9px; }
+.skill-row strong { color:var(--gold); font-size:12px; text-align:right; }
+.combat-stat-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.combat-stat-grid > .field,.combat-stat { padding:13px; border:1px solid var(--line); border-radius:11px; background:#171c26; }
+.combat-stat-grid > .field input { min-height:36px; font-size:17px; font-weight:700; text-align:center; }
+.combat-stat-grid > .field span { min-height:25px; line-height:1.3; }
+.combat-stat { display:grid; align-content:start; gap:7px; text-align:center; }
+.combat-stat > span { color:var(--muted); font-size:10px; line-height:1.3; }
+.combat-stat > strong { color:var(--gold); font:30px Marcellus,Georgia,serif; }
+.combat-stat > small { color:var(--muted); font-size:9px; }
+.inspiration-toggle { display:flex; align-items:center; gap:11px; padding:14px 16px; border:1px solid #d9b66d44; border-radius:11px; background:#d9b66d0b; }
+.inspiration-toggle span { display:grid; gap:4px; }
+.inspiration-toggle strong { font-size:13px; }
+.inspiration-toggle small { color:var(--muted); font-size:10px; line-height:1.4; }
+.attack-table { display:grid; gap:7px; margin:12px 0; }
+.attack-table-head,.attack-row { display:grid; grid-template-columns:minmax(0,1.1fr) 58px minmax(0,1fr) 20px; gap:6px; align-items:center; }
+.attack-table-head { color:var(--muted); font-size:9px; }
+.attack-row input { min-width:0; width:100%; border:1px solid var(--line); border-radius:6px; padding:9px 6px; color:var(--text); background:#0e1219; font-size:11px; }
+.attack-row .text-action { font-size:18px; }
+.dnd-textarea { width:100%; resize:vertical; border:1px solid var(--line); border-radius:8px; padding:11px; color:var(--text); background:#0d1118; outline:none; font:12px/1.65 'DM Sans',sans-serif; }
+.dnd-textarea:focus { border-color:var(--gold); }
+.dnd-notes-column { gap:11px; }
+.dnd-notes-card { display:grid; gap:10px; }
+.dnd-card-label { color:var(--gold); font-size:11px; font-weight:800; letter-spacing:.4px; }
+.sheet-save-bar { position:sticky; bottom:12px; z-index:3; display:flex; justify-content:space-between; align-items:center; gap:18px; margin-top:18px; padding:14px 17px; border:1px solid #d9b66d66; border-radius:13px; background:#121720f2; box-shadow:0 12px 35px #0005; backdrop-filter:blur(12px); }
+.sheet-save-bar > div:first-child { display:grid; gap:4px; min-width:0; }
+.sheet-save-bar > div:first-child strong { overflow-wrap:anywhere; font-size:13px; }
+.sheet-save-bar > div:first-child span { color:var(--muted); font-size:10px; line-height:1.4; }
+@media(max-width:1050px) { .dnd-main-grid { grid-template-columns:minmax(230px,.8fr) minmax(300px,1fr); } .dnd-notes-column { grid-column:1/-1; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; } .dnd-notes-column .dnd-section-heading { grid-column:1/-1; } .identity-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:700px) { .sheet-toolbar,.sheet-save-bar { align-items:stretch; flex-direction:column; } .sheet-toolbar-actions { align-items:stretch; flex-direction:column; } .compact-field { min-width:0; } .dnd-main-grid { grid-template-columns:1fr; } .dnd-notes-column { grid-column:auto; grid-template-columns:1fr; } .dnd-notes-column .dnd-section-heading { grid-column:auto; } .identity-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .dnd-title-mark { align-items:flex-start; flex-direction:column; gap:8px; } .combat-stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .ability-card { grid-template-columns:minmax(70px,1fr) 70px 76px; } .sheet-save-bar .inline-actions { width:100%; } .sheet-save-bar .button { flex:1; } }
+@media(max-width:380px) { .identity-grid { grid-template-columns:1fr; } .attack-table-head,.attack-row { grid-template-columns:minmax(0,1fr) 45px minmax(0,1fr) 16px; gap:4px; } .attack-row input { padding:8px 4px; font-size:10px; } }
+.death-saves-card h3 { margin-bottom:14px; }
+.death-save-columns { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.death-save-columns > div { display:grid; gap:10px; }
+.death-save-columns strong { color:var(--muted); font-size:11px; }
+.death-save-columns > div > div { display:flex; gap:9px; }
+.death-save-columns label { display:grid; place-items:center; width:25px; height:25px; border:1px solid var(--line); border-radius:50%; background:#0e1219; }
+.death-save-columns input { accent-color:var(--gold); }

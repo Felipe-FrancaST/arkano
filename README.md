@@ -103,3 +103,14 @@ Além de `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY`, configure
 ### Atualização do banco
 
 No Supabase, abra **SQL Editor** e execute `supabase/migrations/20260929_campaign_access_control.sql`. Essa migração atualiza as políticas RLS para que desativar o acesso também bloqueie a leitura e a alteração das fichas daquela campanha.
+
+
+## Ficha editável de D&D 5e
+
+A página `/ficha` agora apresenta uma ficha de Dungeons & Dragons 5e organizada em seções responsivas. Jogadores podem criar fichas nas campanhas D&D 5e às quais têm acesso, editar seus dados e salvar no Supabase. Os modificadores dos seis atributos são calculados a partir do valor informado; o bônus de proficiência acompanha o nível (níveis 1–4: +2, 5–8: +3, 9–12: +4, 13–16: +5 e 17–20: +6). O cálculo também é aplicado no banco por um gatilho SQL.
+
+### Atualização necessária do banco para a ficha
+
+No Supabase, abra **SQL Editor** e execute `supabase/migrations/20260929_dnd5e_character_sheet.sql`. A migração adiciona campos de experiência, PV temporários, personalidade, ideais, vínculos, defeitos, ataques, equipamento, características e testes contra a morte. Se estiver criando um banco novo do zero, o arquivo `supabase/schema.sql` já inclui esses campos e o gatilho do bônus de proficiência.
+
+Por enquanto, a área de ficha está habilitada para campanhas cujo sistema seja **D&D 5e**. Os outros sistemas podem receber modelos próprios em etapas futuras.
