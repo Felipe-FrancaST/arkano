@@ -91,3 +91,15 @@ arkano/
 │   └── middleware.ts
 └── supabase/schema.sql
 ```
+
+## Painel do mestre e gerenciamento de campanhas
+
+O painel `/campanhas` permite que mestres criem campanhas, cadastrem jogadores, vinculem contas existentes, editem nome/e-mail/senha, desativem o acesso à campanha e removam um jogador do grupo.
+
+### Variáveis de ambiente adicionais
+
+Além de `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY`, configure na Vercel a variável secreta **`SUPABASE_SERVICE_ROLE_KEY`** com a chave `service_role` do mesmo projeto Supabase. Ela é usada exclusivamente nas rotas do servidor para criar contas e administrar membros; nunca coloque essa chave em variáveis `NEXT_PUBLIC_*` nem a exponha no navegador.
+
+### Atualização do banco
+
+No Supabase, abra **SQL Editor** e execute `supabase/migrations/20260929_campaign_access_control.sql`. Essa migração atualiza as políticas RLS para que desativar o acesso também bloqueie a leitura e a alteração das fichas daquela campanha.
