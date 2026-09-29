@@ -76,9 +76,24 @@ export default function CharacterSheetEditor({ campaigns, initialCharacters, use
     setSelectedId(saved.id); setDraft(null); setMessage("Ficha salva com sucesso.");
   }
   function cancelEdit() { setDraft(null); if (!selectedId) setSelectedId(characters[0]?.id ?? ""); setError(""); setMessage(""); }
-  function updateAttack(index: number, key: keyof Attack, value: string) {
-    const attacks = [...(active?.attacks ?? [])]; attacks[index] = { name: "", bonus: "", damage: "", type: "", ...attacks[index], [key]: value }; update("attacks", attacks);
-  }
+  
+function updateAttack(index: number, key: keyof Attack, value: string) {
+  const attacks = [...(active?.attacks ?? [])];
+
+  const currentAttack = attacks[index] ?? {
+    name: "",
+    bonus: "",
+    damage: "",
+    type: ""
+  };
+
+  attacks[index] = {
+    ...currentAttack,
+    [key]: value
+  };
+
+  update("attacks", attacks);
+}
 
   if (!campaigns.length) return <section className="panel empty-state"><div className="empty-icon">♜</div><h2>Nenhuma campanha de D&amp;D disponível</h2><p className="muted">Para criar sua ficha, primeiro entre em uma campanha de D&amp;D 5e. {isMaster ? "Crie uma campanha com o sistema D&D 5e na área de campanhas." : "Peça ao Mestre para vincular sua conta a uma campanha de D&D 5e."}</p>{isMaster && <a className="button" href="/campanhas">Gerenciar campanhas</a>}</section>;
 
